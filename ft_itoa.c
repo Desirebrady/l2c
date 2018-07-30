@@ -2,60 +2,40 @@
 #include <stdlib.h>
 #include  <stdio.h>
 
-/*char    *ft_itoa(int nbr)
+static int			ft_strlennbr(int n)
 {
-    char *str;
-    long n;
-    int len;
+	int				i;
 
-    len = 0;
-    n = (long)nbr;
-    if (n)
-        n /= 10;
-    if (nbr < 0)
-        nbr *= -1;
-    if (!(str = (char *)malloc(sizeof(char) * len + 1)))
-        return (NULL);
-    str[len] = '\0';
-    while (nbr)
-    {
-        str[len] = (nbr % 10) + '0';
-        nbr /= 10;
-    }
-    return (str);
-}*/
-char    *ft_itoa(int nbr)
-{
-	int		len;
-	long	n_tmp;
-	char	*str;
-
-	len = 0;
-	n_tmp = nbr;
-	while (n_tmp)
-	{
-		n_tmp /= 10;
-		len += 1;
-	}
-	if (nbr < 0)
-	{
-		len += 1;
-		nbr *= -1;
-	}
-	if (!(str = (char *)malloc(sizeof(char) * len + 1)))
-		return (NULL);
-	str[len] ='\0';
-	while (nbr)
-	{
-		str[len] = (n_tmp % 10) + '0';
-		nbr /= 10;
-	}
-	return (str);
+	i = 1;
+	while (n /= 10)
+		i++;
+	return (i);
 }
 
+char				*ft_itoa(int n)
+{
+	long			tmp;
+	char			*str;
+	unsigned int	len;
 
+	tmp = (long)n;	
+	len = ft_strlennbr(tmp) + (n < 0);
+	if (n < 0)
+		tmp = (tmp * -1);
+	if(!(str = (char *)malloc(sizeof(char)*len + 1)))
+		return (NULL);
+	while (len > 0)
+	{
+		str[len - 1] = (tmp % 10) + '0';
+		len--;
+		tmp = tmp / 10;
+	}
+	if (n < 0)
+		str[0] = '-';
+	return (str);
+}
 int main()
 {
-    printf("%s\n", ft_itoa(94564489));
+    printf("%s\n", ft_itoa(-2147483648));
     return (0);
 }

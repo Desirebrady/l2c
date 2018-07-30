@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   split.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dshumba <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/09 10:34:25 by dshumba           #+#    #+#             */
+/*   Updated: 2018/07/09 10:48:37 by dshumba          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <stdio.h>
 
@@ -41,19 +53,19 @@ char		**ft_split(char *str)
 int main()
 {
     char months[] = "MY Name Is DESIRE";
-    char** tokens;
+    char** splitted;
 
-    tokens = ft_split(months);
+    splitted = ft_split(months);
 
-    if (tokens)
+    if (splitted)
     {
         int i;
 
         i =0;
-        while (*(tokens + i))
+        while (*(splitted + i))
         {
-            printf("%s", *(tokens + i));
-            free(*(tokens + i));
+            printf("%s\n", *(splitted + i));
+            free(*(splitted + i));
             i++;
         }
     }
